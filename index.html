@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Verizon Home Device Protect</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <section class="hero">
+    <h1>Protect Your Tech for $25/mo</h1>
+    <p>Tap below to explore everything covered by Verizon Home Device Protect.</p>
+    <button onclick="startApp()">Explore Coverage</button>
+  </section>
+
+  <section class="device-grid hidden" id="deviceGrid">
+    <h2>What’s Covered?</h2>
+    <div class="devices">
+      <div class="device" onclick="showDetail('TV')">📺 TV</div>
+      <div class="device" onclick="showDetail('Xbox')">🎮 Xbox</div>
+      <div class="device" onclick="showDetail('Laptop')">💻 Laptop</div>
+      <div class="device" onclick="showDetail('Tablet')">📱 Tablet</div>
+    </div>
+    <div id="deviceDetail" class="detail-box"></div>
+  </section>
+
+  <section class="comparison hidden" id="comparison">
+    <h2>Real Savings Example</h2>
+    <div class="comparison-box">
+      <div class="compare">
+        <h3>Without VDHP</h3>
+        <p>Xbox repair: $285+</p>
+      </div>
+      <div class="compare">
+        <h3>With VDHP</h3>
+        <p>Only $49 deductible</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta hidden" id="cta">
+    <h2>Talk to Your Rep</h2>
+    <p>Ask <strong>Nicky McCracken</strong> how to enroll in VDHP today.</p>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
