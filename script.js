@@ -24,7 +24,7 @@ const items = [
   { id: "49-8", name: "Pet Snack & Food Dispensers", fee: 49, cost: 100, icon: "🍖" },
   { id: "49-9", name: "Pet Auto Fetch Machines", fee: 49, cost: 150, icon: "🐕" },
 
-  // No service fee items
+  // No Service Fee items
   { id: "0-1", name: "Remote Control (Original Control Only)", fee: 0, cost: 50, icon: "🎮" },
   { id: "0-2", name: "Game Controllers", fee: 0, cost: 60, icon: "🎮" },
   { id: "0-3", name: "External PC Speakers (Wired or Wireless)", fee: 0, cost: 80, icon: "🔊" },
@@ -49,3 +49,62 @@ const items = [
   { id: "0-22", name: "Smart Personal Home Use EKG Monitors", fee: 0, cost: 300, icon: "💓" },
   { id: "0-23", name: "Smart Pulse Oximeters", fee: 0, cost: 150, icon: "🩸" },
 ];
+
+function createTile(item) {
+  const div = document.createElement("div");
+  div.className = "tile";
+  div.dataset.cost = item.cost;
+  div.dataset.id = item.id;
+  div.title = item.name;
+  div.tabIndex = 0;
+
+  const iconSpan = document.createElement("span");
+  iconSpan.textContent = item.icon;
+  iconSpan.style.fontSize = "36px";
+  iconSpan.style.display = "block";
+  iconSpan.style.marginBottom = "8px";
+
+  const nameSpan = document.createElement("span");
+  nameSpan.textContent = item.name;
+
+  div.appendChild(iconSpan);
+  div.appendChild(nameSpan);
+
+  div.addEventListener("click", () => {
+    div.classList.toggle("selected");
+    updateTotal();
+  });
+  div.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      div.classList.toggle("selected");
+      updateTotal();
+    }
+  });
+
+  return div;
+}
+
+function updateTotal() {
+  const selected = document.querySelectorAll(".tile.selected");
+  let total = 0;
+  selected.forEach((tile) => {
+    total += parseInt(tile.dataset.cost);
+  });
+  document.getElementById("grand-total").textContent = "$" + total.toLocaleString();
+}
+
+function init() {
+  const fee99Container = document.getElementById("fee-99");
+  const fee49Container = document.getElementById("fee-49");
+  const fee0Container = document.getElementById("fee-0");
+
+  items.forEach((item) => {
+    const tile = createTile(item);
+    if (item.fee === 99) fee99Container.appendChild(tile);
+    else if (item.fee === 49) fee49Container.appendChild(tile);
+    else fee0Container.appendChild(tile);
+  });
+}
+
+window.onload = init;
