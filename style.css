@@ -60,10 +60,8 @@ h1 {
 }
 .tile.selected {
   background-color: #d9002d;
+  color: white;
   box-shadow: 0 0 10px #d9002d;
-}
-.tile.selected img {
-  filter: none;
 }
 .total {
   font-size: 1.5rem;
