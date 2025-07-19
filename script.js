@@ -1,26 +1,20 @@
-function startApp() {
-  document.querySelector(".hero").classList.add("hidden");
-  document.getElementById("deviceGrid").classList.remove("hidden");
-}
+document.querySelectorAll("input[type=checkbox]").forEach(checkbox => {
+  checkbox.addEventListener("change", updateTotal);
+});
 
-function showDetail(device) {
-  const detailBox = document.getElementById("deviceDetail");
-  let text = "";
-  switch (device) {
-    case "TV":
-      text = "Covers screen damage, power issues, and more.";
-      break;
-    case "Xbox":
-      text = "Gaming consoles like Xbox are covered with a $49 deductible.";
-      break;
-    case "Laptop":
-      text = "Protection from accidental drops, spills, and breakdowns.";
-      break;
-    case "Tablet":
-      text = "Broken screens? Covered. Malfunctions? Covered.";
-      break;
+function updateTotal() {
+  let total = 0;
+  document.querySelectorAll("input[type=checkbox]:checked").forEach(cb => {
+    total += parseInt(cb.getAttribute("data-price"));
+  });
+  document.getElementById("total").textContent = "$" + total.toLocaleString();
+
+  const offer = document.getElementById("verizon-offer");
+  if (total > 0) {
+    offer.classList.remove("hidden");
+    offer.textContent = `Verizon will cover up to $5,000 worth of tech for just $25/month.`;
+  } else {
+    offer.classList.add("hidden");
+    offer.textContent = "";
   }
-  detailBox.innerText = text;
-  document.getElementById("comparison").classList.remove("hidden");
-  document.getElementById("cta").classList.remove("hidden");
 }
